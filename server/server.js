@@ -310,7 +310,7 @@ global.onServerLoaded = () => {
 };
 
 // Start the HTTP Server & Load Game Servers
-server.listen(process.env.PORT || Config.port, () => {
+server.listen(Config.port, () => {
     Config.servers.forEach(server => {
     // Load all of the servers.
         loadGameServer(
