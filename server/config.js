@@ -1,3 +1,7 @@
+const isRender = Boolean(process.env.RENDER_EXTERNAL_HOSTNAME);
+const renderHost = process.env.RENDER_EXTERNAL_HOSTNAME || "localhost";
+const renderPort = Number(process.env.PORT) || 3000;
+
 module.exports = {
     // Development
     dev_build: false, // Whether this version is unstable and should be clearly marked as such.
@@ -37,7 +41,21 @@ module.exports = {
     properties  - This overrides other settings in this file, assuming the selected gamemode doesn't also override it.
   */
 
-    servers: [
+    servers: isRender ? [{
+            share_client_server: true,
+            host: renderHost,
+            port: renderPort,
+            id: "la",
+            region: "USA",
+            serverhost: "Render",
+            location: "Oregon",
+            gamemode: ["ffa"],
+            player_cap: 80,
+            featured: true,
+            unlisted: false,
+            private: false,
+            properties: { bot_cap: 20 }
+        }] : [
         {
             share_client_server: false,
             host: "localhost:3001",
