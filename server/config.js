@@ -41,16 +41,33 @@ module.exports = {
             share_client_server: true,
             host: process.env.RENDER_EXTERNAL_HOSTNAME,
             port: Number(process.env.PORT) || 3000,
-            id: "lb",
-            region: "USA",
+            id: "la",
+            region: "Local",
             serverhost: "Render",
             location: "Oregon",
-            gamemode: ["maze"],
+            gamemode: ["ffa"],
             player_cap: 80,
-            featured: true,
+            featured: false,
             unlisted: false,
             private: false,
-            properties: { allow_server_travel: true }
+            properties: {
+                bot_cap: 2,
+                daily_tank: {
+                    tank: "whirlwind",
+                    tier: 3,
+                    ads: false,
+                    ad_sources: [
+                        {
+                            file: "example_video_ad.mp4",
+                            use_regular_ad_size: true
+                        },
+                        {
+                            file: "example_image_ad.png",
+                            use_regular_ad_size: true
+                        }
+                    ]
+                }
+            }
         }] : [
         {
             share_client_server: false,
