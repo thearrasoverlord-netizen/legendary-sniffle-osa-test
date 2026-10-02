@@ -4,8 +4,8 @@ module.exports = {
 
     // Client
     main_menu: "index.html", // Where the main menu is located (in the /public folder).
-    host: "localhost:3000", // Game server domain. Render uses its public hostname.
-    port: 3000, // Which port to run the web server on.
+    host: process.env.RENDER_EXTERNAL_HOSTNAME || "localhost:3000", // Game server domain. Render uses its public hostname.
+    port: Number(process.env.PORT) || 3000, // Which port to run the web server on.
 
     // Server
     visible_list_interval: 250, // How often to update the list of the entities that players can see. Has effects of when entities are activated.
@@ -37,7 +37,21 @@ module.exports = {
     properties  - This overrides other settings in this file, assuming the selected gamemode doesn't also override it.
   */
 
-    servers: [
+    servers: process.env.RENDER_EXTERNAL_HOSTNAME ? [{
+            share_client_server: true,
+            host: process.env.RENDER_EXTERNAL_HOSTNAME,
+            port: Number(process.env.PORT) || 3000,
+            id: "lb",
+            region: "USA",
+            serverhost: "Render",
+            location: "Oregon",
+            gamemode: ["maze"],
+            player_cap: 80,
+            featured: true,
+            unlisted: false,
+            private: false,
+            properties: { allow_server_travel: true }
+        }] : [
         {
             share_client_server: false,
             host: "localhost:3001",
