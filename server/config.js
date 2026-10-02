@@ -1,15 +1,11 @@
-const isRender = Boolean(process.env.RENDER_EXTERNAL_HOSTNAME);
-const renderHost = process.env.RENDER_EXTERNAL_HOSTNAME || "localhost";
-const renderPort = Number(process.env.PORT) || 3000;
-
 module.exports = {
     // Development
     dev_build: false, // Whether this version is unstable and should be clearly marked as such.
 
     // Client
     main_menu: "index.html", // Where the main menu is located (in the /public folder).
-    host: isRender ? renderHost : "localhost:3000", // Game server domain. Render uses its public hostname.
-    port: isRender ? renderPort : 3000, // Which port to run the web server on.
+    host: "localhost:3000", // Game server domain. Render uses its public hostname.
+    port: 3000, // Which port to run the web server on.
 
     // Server
     visible_list_interval: 250, // How often to update the list of the entities that players can see. Has effects of when entities are activated.
@@ -41,21 +37,7 @@ module.exports = {
     properties  - This overrides other settings in this file, assuming the selected gamemode doesn't also override it.
   */
 
-    servers: isRender ? [{
-            share_client_server: true,
-            host: renderHost,
-            port: renderPort,
-            id: "la",
-            region: "USA",
-            serverhost: "Render",
-            location: "Oregon",
-            gamemode: ["ffa"],
-            player_cap: 80,
-            featured: true,
-            unlisted: false,
-            private: false,
-            properties: { bot_cap: 20 }
-        }] : [
+    servers: [
         {
             share_client_server: false,
             host: "localhost:3001",
